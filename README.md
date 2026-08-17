@@ -1,90 +1,160 @@
-<h1 align="center">📦 Vendor Performance Analytics</h1>
 
-<p align="center">
-  <em>Transforming raw procurement data into actionable business insights</em>
-</p>
+# 🧾 Vendor Performance Analysis – Retail Inventory & Sales
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Work%20in%20Progress-yellow?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" />
-</p>
+_Analyzing vendor efficiency and profitability to support strategic purchasing and inventory decisions using SQL, Python, and Power BI._
 
 ---
 
-## 📖 Overview
+## 📌 Table of Contents
+- <a href="#overview">Overview</a>
+- <a href="#business-problem">Business Problem</a>
+- <a href="#dataset">Dataset</a>
+- <a href="#tools--technologies">Tools & Technologies</a>
+- <a href="#project-structure">Project Structure</a>
+- <a href="#data-cleaning--preparation">Data Cleaning & Preparation</a>
+- <a href="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a>
+- <a href="#research-questions--key-findings">Research Questions & Key Findings</a>
+- <a href="#dashboard">Dashboard</a>
+- <a href="#how-to-run-this-project">How to Run This Project</a>
+- <a href="#final-recommendations">Final Recommendations</a>
+- <a href="#author--contact">Author & Contact</a>
 
-**Vendor Performance Analytics** is a real-world data analytics project that evaluates vendor performance using **SQL, Python, and Power BI**.
+---
+<h2><a class="anchor" id="overview"></a>Overview</h2>
 
-The goal is to turn raw procurement data into meaningful business insights by analyzing:
-- Vendor efficiency
-- Purchasing trends
-- Delivery performance
-- Cost optimization opportunities
+This project evaluates vendor performance and retail inventory dynamics to drive strategic insights for purchasing, pricing, and inventory optimization. A complete data pipeline was built using SQL for ETL, Python for analysis and hypothesis testing, and Power BI for visualization.
 
-This project simulates how a business intelligence analyst would approach vendor management — from raw data to a decision-ready dashboard.
+---
+<h2><a class="anchor" id="business-problem"></a>Business Problem</h2>
 
-> 🚧 **Project Status:** Actively in development. New analysis, dashboards, and documentation are being added as the project progresses.
+Effective inventory and sales management are critical in the retail sector. This project aims to:
+- Identify underperforming brands needing pricing or promotional adjustments
+- Determine vendor contributions to sales and profits
+- Analyze the cost-benefit of bulk purchasing
+- Investigate inventory turnover inefficiencies
+- Statistically validate differences in vendor profitability
+
+---
+<h2><a class="anchor" id="dataset"></a>Dataset</h2>
+
+- Multiple CSV files located in `/data/` folder (sales, vendors, inventory)
+- Summary table created from ingested data and used for analysis
 
 ---
 
-## 🎯 Key Objectives
+<h2><a class="anchor" id="tools--technologies"></a>Tools & Technologies</h2>
 
-- 📊 Analyze vendor performance metrics (cost, delivery, quality)
-- 📈 Identify procurement trends over time
-- 📉 Build interactive Power BI dashboards for decision-making
-- 💡 Generate actionable business insights
-- 💰 Recommend cost optimization opportunities
-
----
-
-## 🛠️ Tech Stack
-
-| Category | Tools |
-|---|---|
-| **Database & Querying** | SQL |
-| **Data Processing** | Python, Pandas, NumPy |
-| **Visualization** | Matplotlib, Power BI |
-| **Version Control** | Git & GitHub |
+- SQL (Common Table Expressions, Joins, Filtering)
+- Python (Pandas, Matplotlib, Seaborn, SciPy)
+- Power BI (Interactive Visualizations)
+- GitHub
 
 ---
-
-## 🗺️ Development Roadmap
-
-| Stage | Status |
-|---|---|
-| Repository Setup | ✅ Done |
-| Project Planning | ✅ Done |
-| Exploratory Data Analysis (EDA) | 🔄 In Progress |
-| SQL Query Development | 🔄 In Progress |
-| Power BI Dashboard | ⏳ Planned |
-| Business Report | ⏳ Planned |
-| Project Documentation | ⏳ Planned |
-
----
-
-## 📂 Project Structure *(to be updated as project grows)*
+<h2><a class="anchor" id="project-structure"></a>Project Structure</h2>
 
 ```
-Vendor-Performance-Analytics/
+vendor-performance-analysis/
 │
-├── data/                # Raw and cleaned datasets
-├── sql/                 # SQL queries for analysis
-├── notebooks/           # Python EDA & analysis notebooks
-├── dashboard/           # Power BI (.pbix) files
-├── reports/             # Business insights & summary reports
-└── README.md
+├── README.md
+├── .gitignore
+├── requirements.txt
+├── Vendor Performance Report.pdf
+│
+├── notebooks/                  # Jupyter notebooks
+│   ├── exploratory_data_analysis.ipynb
+│   ├── vendor_performance_analysis.ipynb
+│
+├── scripts/                    # Python scripts for ingestion and processing
+│   ├── ingestion_db.py
+│   └── get_vendor_summary.py
+│
+├── dashboard/                  # Power BI dashboard file
+│   └── vendor_performance_dashboard.pbix
 ```
 
 ---
+<h2><a class="anchor" id="data-cleaning--preparation"></a>Data Cleaning & Preparation</h2>
 
-## 📌 What's Coming Next
-
-- [ ] Complete exploratory data analysis on procurement dataset
-- [ ] Write and optimize SQL queries for vendor KPIs
-- [ ] Design Power BI dashboard with drill-down visuals
-- [ ] Publish final business insights report
-- [ ] Add screenshots/GIFs of the final dashboard here
+- Removed transactions with:
+  - Gross Profit ≤ 0
+  - Profit Margin ≤ 0
+  - Sales Quantity = 0
+- Created summary tables with vendor-level metrics
+- Converted data types, handled outliers, merged lookup tables
 
 ---
+<h2><a class="anchor" id="exploratory-data-analysis-eda"></a>Exploratory Data Analysis (EDA)</h2>
+
+**Negative or Zero Values Detected:**
+- Gross Profit: Min -52,002.78 (loss-making sales)
+- Profit Margin: Min -∞ (sales at zero or below cost)
+- Unsold Inventory: Indicating slow-moving stock
+
+**Outliers Identified:**
+- High Freight Costs (up to 257K)
+- Large Purchase/Actual Prices
+
+**Correlation Analysis:**
+- Weak between Purchase Price & Profit
+- Strong between Purchase Qty & Sales Qty (0.999)
+- Negative between Profit Margin & Sales Price (-0.179)
+
+---
+<h2><a class="anchor" id="research-questions--key-findings"></a>Research Questions & Key Findings</h2>
+
+1. **Brands for Promotions**: 198 brands with low sales but high profit margins
+2. **Top Vendors**: Top 10 vendors = 65.69% of purchases → risk of over-reliance
+3. **Bulk Purchasing Impact**: 72% cost savings per unit in large orders
+4. **Inventory Turnover**: $2.71M worth of unsold inventory
+5. **Vendor Profitability**:
+   - High Vendors: Mean Margin = 31.17%
+   - Low Vendors: Mean Margin = 41.55%
+6. **Hypothesis Testing**: Statistically significant difference in profit margins → distinct vendor strategies
+
+---
+<h2><a class="anchor" id="dashboard"></a>Dashboard</h2>
+
+- Power BI Dashboard shows:
+  - Vendor-wise Sales and Margins
+  - Inventory Turnover
+  - Bulk Purchase Savings
+  - Performance Heatmaps
+
+![Vendor Performance Dashboard](images/dashboard.png)
+
+---
+<h2><a class="anchor" id="how-to-run-this-project"></a>How to Run This Project</h2>
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/vendor-performance-analysis.git
+```
+3. Load the CSVs and ingest into database:
+```bash
+python scripts/ingestion_db.py
+```
+4. Create vendor summary table:
+```bash
+python scripts/get_vendor_summary.py
+```
+5. Open and run notebooks:
+   - `notebooks/exploratory_data_analysis.ipynb`
+   - `notebooks/vendor_performance_analysis.ipynb`
+6. Open Power BI Dashboard:
+   - `dashboard/vendor_performance_dashboard.pbix`
+
+---
+<h2><a class="anchor" id="final-recommendations"></a>Final Recommendations</h2>
+
+- Diversify vendor base to reduce risk
+- Optimize bulk order strategies
+- Reprice slow-moving, high-margin brands
+- Clear unsold inventory strategically
+- Improve marketing for underperforming vendors
+
+---
+<h2><a class="anchor" id="author--contact"></a>Author & Contact</h2>
+
+**Ayushi Mishra**  
+Data Analyst  
+📧 Email: atulrajsingh883@gmail.com 
