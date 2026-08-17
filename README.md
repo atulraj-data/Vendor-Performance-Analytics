@@ -120,7 +120,7 @@ vendor-performance-analysis/
   - Bulk Purchase Savings
   - Performance Heatmaps
 
-![Vendor Performance Dashboard](images/dashboard.png)
+
 
 ---
 <h2><a class="anchor" id="how-to-run-this-project"></a>How to Run This Project</h2>
@@ -155,6 +155,6 @@ python scripts/get_vendor_summary.py
 ---
 <h2><a class="anchor" id="author--contact"></a>Author & Contact</h2>
 
-**Ayushi Mishra**  
+**Atul Raj Singh**  
 Data Analyst  
 📧 Email: atulrajsingh883@gmail.com 
